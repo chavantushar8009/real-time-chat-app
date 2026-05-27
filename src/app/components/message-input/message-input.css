@@ -1,0 +1,18 @@
+.input-box{
+  display: flex;
+  padding: 15px;
+  background: white;
+}
+
+input{
+  flex: 1;
+  padding: 10px;
+}
+
+button{
+  padding: 10px 20px;
+  margin-left: 10px;
+  background: #1976d2;
+  color: white;
+  border: none;
+}
