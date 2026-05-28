@@ -1,37 +1,56 @@
-<div class="chat-container">
+<div class="app-container">
 
   <!-- Sidebar -->
   <div class="sidebar">
 
-    <h2>Profiles</h2>
+    <div class="sidebar-header">
+      <h2>Chat App</h2>
+    </div>
 
     <div
-      class="profile"
+      class="profile-card"
       *ngFor="let user of users"
       (click)="switchUser(user.name)"
       [class.active]="currentUser === user.name"
     >
 
-      <div class="profile-name">
-        {{ user.name }}
+      <div class="avatar">
+        {{ user.name.charAt(0) }}
       </div>
 
-      <div class="status">
-        {{ user.status }}
+      <div class="profile-info">
+
+        <h3>{{ user.name }}</h3>
+
+        <p>{{ user.status }}</p>
+
       </div>
 
     </div>
 
   </div>
 
-  <!-- Chat Section -->
-  <div class="chat-box">
+  <!-- Main Chat -->
+  <div class="chat-section">
 
+    <!-- Header -->
     <div class="chat-header">
 
-      <span>
-        {{ currentUser }}
-      </span>
+      <div class="header-user">
+
+        <div class="avatar big">
+          {{ currentUser.charAt(0) }}
+        </div>
+
+        <div>
+
+          <h3>{{ currentUser }}</h3>
+
+          <span>Active Now</span>
+
+        </div>
+
+      </div>
 
       <button class="logout-btn" (click)="logout()">
         Logout
@@ -39,40 +58,62 @@
 
     </div>
 
-    <div class="messages">
+    <!-- Messages -->
+    <div class="messages-container">
 
       <div
         *ngFor="let msg of messages"
-        class="message"
-        [class.my-message]="msg.sender === currentUser"
+        class="message-wrapper"
+        [class.my-wrapper]="msg.sender === currentUser"
       >
 
-        <strong>{{ msg.sender }}</strong>
+        <div
+          class="message-card"
+          [class.my-message]="msg.sender === currentUser"
+        >
 
-        <p>{{ msg.text }}</p>
+          <div class="sender-name">
+            {{ msg.sender }}
+          </div>
 
-        <div *ngIf="msg.file">
-          📎 {{ msg.file }}
+          <div class="message-text">
+            {{ msg.text }}
+          </div>
+
+          <div class="file-box" *ngIf="msg.file">
+            📎 {{ msg.file }}
+          </div>
+
+          <div class="time">
+            {{ msg.time }}
+          </div>
+
         </div>
-
-        <small>{{ msg.time }}</small>
 
       </div>
 
     </div>
 
-    <div class="input-box">
+    <!-- Input -->
+    <div class="input-area">
 
       <input
         type="text"
         [(ngModel)]="message"
-        placeholder="Type message..."
+        placeholder="Type a message..."
       >
 
-      <input
-        type="file"
-        (change)="onFileSelected($event)"
-      >
+      <label class="file-upload">
+
+        📎
+
+        <input
+          type="file"
+          (change)="onFileSelected($event)"
+          hidden
+        >
+
+      </label>
 
       <button (click)="sendMessage()">
         Send
