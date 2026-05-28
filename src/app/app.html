@@ -1,18 +1,23 @@
 <div class="container">
 
-  <h1>User Presence Status</h1>
+  <h1>Chat File Upload</h1>
 
-  <div class="user-card" *ngFor="let user of users">
+  <input
+    type="file"
+    (change)="onFileSelected($event)"
+  >
+
+  <div class="file-list">
+
+    <h3>Uploaded Files</h3>
 
     <div
-      class="status"
-      [ngClass]="user.online ? 'online' : 'offline'">
-    </div>
+      class="file-item"
+      *ngFor="let file of uploadedFiles">
 
-    <p>
-      {{ user.name }} -
-      {{ user.online ? 'Online' : 'Offline' }}
-    </p>
+      {{ file }}
+
+    </div>
 
   </div>
 

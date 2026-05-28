@@ -4,26 +4,17 @@
   font-family: Arial;
 }
 
-.user-card {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+input {
+  margin-top: 20px;
+}
+
+.file-list {
+  margin-top: 20px;
+}
+
+.file-item {
   background: #f3f3f3;
-  padding: 12px;
+  padding: 10px;
   margin-bottom: 10px;
-  border-radius: 10px;
-}
-
-.status {
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-}
-
-.online {
-  background-color: green;
-}
-
-.offline {
-  background-color: red;
+  border-radius: 8px;
 }

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PresenceService } from './services/presence';
+import { FileUploadService } from './services/file-upload';
 
 @Component({
   selector: 'app-root',
@@ -9,17 +9,25 @@ import { PresenceService } from './services/presence';
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 
-  users: any[] = [];
+  uploadedFiles: string[] = [];
 
-  constructor(private presenceService: PresenceService) {}
+  constructor(private fileUploadService: FileUploadService) {
 
-  ngOnInit(): void {
-
-    this.presenceService.users$.subscribe((data: any[]) => {
-      this.users = data;
+    this.fileUploadService.files$.subscribe(files => {
+      this.uploadedFiles = files;
     });
+
+  }
+
+  onFileSelected(event: any) {
+
+    const file = event.target.files[0];
+
+    if (file) {
+      this.fileUploadService.uploadFile(file);
+    }
 
   }
 
