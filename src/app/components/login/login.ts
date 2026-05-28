@@ -1,35 +1,29 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './login.html',
-  styleUrl: './login.css'
+  styleUrls: ['./login.css']
 })
 export class LoginComponent {
 
   username = '';
   password = '';
 
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) {}
+  constructor(private router: Router) {}
 
   login() {
 
-    this.authService.login(this.username, this.password);
+    if (this.username && this.password) {
 
-    if (this.authService.checkAuth()) {
-      this.router.navigate(['/chat']);
-    } else {
-      alert('Invalid Credentials');
+      localStorage.setItem('loggedInUser', this.username);
+
+      this.router.navigate(['/']);
     }
-
   }
-
 }

@@ -1,19 +1,25 @@
-<div class="login-box">
+<div class="login-container">
 
-  <h2>Login</h2>
+  <div class="login-box">
 
-  <input
-    type="text"
-    placeholder="Username"
-    [(ngModel)]="username"
-  >
+    <h2>Login</h2>
 
-  <input
-    type="password"
-    placeholder="Password"
-    [(ngModel)]="password"
-  >
+    <input
+      type="text"
+      [(ngModel)]="username"
+      placeholder="Username"
+    >
 
-  <button (click)="login()">Login</button>
+    <input
+      type="password"
+      [(ngModel)]="password"
+      placeholder="Password"
+    >
+
+    <button (click)="login()">
+      Login
+    </button>
+
+  </div>
 
 </div>

@@ -1,11 +1,29 @@
-.login-box {
-  width: 300px;
-  margin: 100px auto;
+.login-container {
+  height: 100vh;
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  background: #ece5dd;
 }
 
-input, button {
+.login-box {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+input {
   padding: 10px;
+}
+
+button {
+  padding: 10px;
+  background: #005c4b;
+  color: white;
+  border: none;
+  cursor: pointer;
 }

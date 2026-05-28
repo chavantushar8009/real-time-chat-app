@@ -5,24 +5,63 @@ import { Injectable } from '@angular/core';
 })
 export class AuthService {
 
-  isLoggedIn = false;
+  users = [
+    {
+      username: 'user1',
+      password: '1234',
+      status: 'online'
+    },
+    {
+      username: 'user2',
+      password: '1234',
+      status: 'away'
+    }
+  ];
+
+  currentUser: any = null;
 
   login(username: string, password: string) {
 
-    if (username === 'admin' && password === '1234') {
-      this.isLoggedIn = true;
-      localStorage.setItem('loggedIn', 'true');
+    const foundUser = this.users.find(
+      user =>
+        user.username === username &&
+        user.password === password
+    );
+
+    if (foundUser) {
+
+      this.currentUser = foundUser;
+
+      localStorage.setItem(
+        'currentUser',
+        JSON.stringify(foundUser)
+      );
+
+      return true;
     }
+
+    return false;
 
   }
 
   logout() {
-    this.isLoggedIn = false;
-    localStorage.removeItem('loggedIn');
+
+    localStorage.removeItem('currentUser');
+
+  }
+
+  getCurrentUser() {
+
+    return JSON.parse(
+      localStorage.getItem('currentUser') || 'null'
+    );
+
   }
 
   checkAuth() {
-    return localStorage.getItem('loggedIn') === 'true';
+
+    return !!localStorage.getItem('currentUser');
+
   }
 
 }

@@ -1,3 +1,85 @@
-<h1>Welcome to Chat Page</h1>
+<div class="chat-container">
 
-<p>User authenticated successfully.</p>
+  <!-- Sidebar -->
+  <div class="sidebar">
+
+    <h2>Profiles</h2>
+
+    <div
+      class="profile"
+      *ngFor="let user of users"
+      (click)="switchUser(user.name)"
+      [class.active]="currentUser === user.name"
+    >
+
+      <div class="profile-name">
+        {{ user.name }}
+      </div>
+
+      <div class="status">
+        {{ user.status }}
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Chat Section -->
+  <div class="chat-box">
+
+    <div class="chat-header">
+
+      <span>
+        {{ currentUser }}
+      </span>
+
+      <button class="logout-btn" (click)="logout()">
+        Logout
+      </button>
+
+    </div>
+
+    <div class="messages">
+
+      <div
+        *ngFor="let msg of messages"
+        class="message"
+        [class.my-message]="msg.sender === currentUser"
+      >
+
+        <strong>{{ msg.sender }}</strong>
+
+        <p>{{ msg.text }}</p>
+
+        <div *ngIf="msg.file">
+          📎 {{ msg.file }}
+        </div>
+
+        <small>{{ msg.time }}</small>
+
+      </div>
+
+    </div>
+
+    <div class="input-box">
+
+      <input
+        type="text"
+        [(ngModel)]="message"
+        placeholder="Type message..."
+      >
+
+      <input
+        type="file"
+        (change)="onFileSelected($event)"
+      >
+
+      <button (click)="sendMessage()">
+        Send
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
